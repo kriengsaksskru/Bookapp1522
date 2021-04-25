@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:BOOKAPP1522/Screens/app/food_app.dart';
+import 'package:BOOKAPP1522/Screens/app/Book_app.dart';
 import 'package:http/http.dart' as Http;
 import '../Login/components/background.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -32,12 +32,12 @@ class _MenuPageState extends State<MenuPage> {
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
-      backgroundColor: Colors.orange.shade600,
+      backgroundColor: Colors.blue.shade600,
       title: new Text(
-        'เมนูอาหาร',
-        style: GoogleFonts.itim(
-          fontSize: 26,
-          color: Colors.white,
+        'นิทานทั้งหมด',
+        style: GoogleFonts.kanit(
+          fontSize: 30,
+          color: Colors.brown,
           fontWeight: FontWeight.w100,
         ),
       ),
@@ -68,14 +68,14 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Future<String> _getMenuAPI() async {
-    var response = await Http.get(
-        'https://akkarapon-sompoht.github.io/templel/foodapp.json');
+    var response =
+        await Http.get('https://kriengsaksskru.github.io/booka1/book.json');
 
     jsonData = json.decode(utf8.decode(response.bodyBytes));
     templeList.clear();
     for (var item in jsonData) {
       TemplelData templelData = TemplelData(item['number'], item['name'],
-          item['raw_material'], item['how_to'], item['img']);
+          item['short_Stories'], item['the_storyline'], item['thoughts']);
       templeList.add(templelData);
     }
     if (searchKey == "") {
@@ -93,7 +93,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange.shade100,
+      backgroundColor: Colors.blue.shade100,
       appBar: searchBar.build(context),
       key: _scaffoldKey,
       body: Background(
@@ -112,19 +112,20 @@ class _MenuPageState extends State<MenuPage> {
                             context,
                             MaterialPageRoute(
                                 // ignore: missing_required_param
-                                builder: (context) => FoodAppPage(
+                                builder: (context) => Bookapp2(
                                       number: templeList[index].number,
                                       name: templeList[index].name,
-                                      raw_material:
-                                          templeList[index].raw_material,
-                                      how_to: templeList[index].how_to,
-                                      img: templeList[index].img,
+                                      short_Stories:
+                                          templeList[index].short_Stories,
+                                      the_storyline:
+                                          templeList[index].the_storyline,
+                                      thoughts: templeList[index].thoughts,
                                     )));
                       },
                       child: ListTile(
                         title: Text(
                           "${templeListShow[index].name}",
-                          style: GoogleFonts.pridi(
+                          style: GoogleFonts.kanit(
                             fontSize: 20,
                           ),
                         ),
@@ -153,10 +154,11 @@ class _MenuPageState extends State<MenuPage> {
 class TemplelData {
   int number;
   String name;
-  String raw_material;
-  String how_to;
-  String img;
+  String short_Stories;
+  String the_storyline;
+  String thoughts;
 
-  TemplelData(this.number, this.name, this.raw_material, this.how_to, this.img);
+  TemplelData(this.number, this.name, this.short_Stories, this.the_storyline,
+      this.thoughts);
   startsWith(String searchKey) {}
 }

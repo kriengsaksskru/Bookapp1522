@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Search',
       theme: new ThemeData(
         primaryColor: Colors.blue[500],
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.blue,
       ),
       home: WelcomeScreen(),
     );

@@ -17,39 +17,23 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              "WELCOME TO TALES READER",
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.05),
             SvgPicture.asset(
-              "",
+              "assets/icons/book1.svg",
               height: size.height * 0.45,
             ),
-            SizedBox(height: size.height * 0),
+            SizedBox(height: size.height * 0.05),
             RoundedButton(
-              text: "LOGIN",
-              color: Colors.red.shade700,
+              text: "ยินดีต้อนรับ",
               press: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
                       return LoginScreen();
-                    },
-                  ),
-                );
-              },
-            ),
-            RoundedButton(
-              text: "SIGN UP",
-              color: kPrimaryLightColor,
-              textColor: Colors.black,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
                     },
                   ),
                 );
