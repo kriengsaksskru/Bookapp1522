@@ -28,6 +28,7 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.05),
             RoundedButton(
               text: "ยินดีต้อนรับ",
+              color: Colors.purple.shade700,
               press: () {
                 Navigator.push(
                   context,

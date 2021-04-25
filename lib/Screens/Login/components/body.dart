@@ -45,8 +45,8 @@ class Body extends StatelessWidget {
               },
             ),
             RoundedButton(
-              text: "LOGIN",
-              color: Colors.red.shade700,
+              text: "เข้าสู่ระบบ",
+              color: Colors.purple.shade700,
               press: () {
                 if (username != '' && password != '') {
                   Navigator.push(context,

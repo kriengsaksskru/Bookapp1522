@@ -36,8 +36,8 @@ class Body extends StatelessWidget {
               onChanged: (value) {},
             ),
             RoundedButton(
-              text: "SIGNUP",
-              color: Colors.red.shade700,
+              text: "ลงทะเบียน",
+              color: Colors.purple.shade700,
               press: () {},
             ),
             SizedBox(height: size.height * 0.01),
