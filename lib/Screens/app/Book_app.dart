@@ -1,23 +1,22 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Bookapp2 extends StatefulWidget {
-  final int number;
   final String name;
   final String short_Stories;
   final String the_storyline;
   final String thoughts;
+  final String photo;
 
   Bookapp2(
       {Key key,
-      @required this.number,
-      this.name,
+      @required this.name,
       this.short_Stories,
       this.the_storyline,
-      this.thoughts})
+      this.thoughts,
+      this.photo})
       : super(key: key);
   @override
   _Bookapp2State createState() => _Bookapp2State();
@@ -44,9 +43,9 @@ class _Bookapp2State extends State<Bookapp2> {
         title: Text(
           'นิทาน',
           style: GoogleFonts.kanit(
-            fontSize: 26,
-            color: Colors.red,
-            fontWeight: FontWeight.w100,
+            fontSize: 30,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -59,7 +58,7 @@ class _Bookapp2State extends State<Bookapp2> {
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Text(
-                    "${widget.number}",
+                    "${widget.name}",
                     style: GoogleFonts.kanit(
                       fontSize: 24,
                       color: Colors.black,
@@ -69,21 +68,15 @@ class _Bookapp2State extends State<Bookapp2> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 0,
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                child: Align(
-                  alignment: FractionalOffset.bottomLeft,
-                  child: Text(
-                    "${widget.name}",
-                    style: GoogleFonts.kanit(
-                      fontSize: 24,
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              Card(
+                child: Image.network('${widget.photo}'),
+                semanticContainer: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0)),
+                margin: EdgeInsets.all(0),
               ),
               SizedBox(
                 height: 5,
@@ -96,7 +89,7 @@ class _Bookapp2State extends State<Bookapp2> {
                     "${widget.short_Stories}",
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.green,
+                      color: Colors.red,
                       height: 2,
                       fontWeight: FontWeight.normal,
                     ),
@@ -114,7 +107,7 @@ class _Bookapp2State extends State<Bookapp2> {
                     "${widget.the_storyline}",
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.blue,
+                      color: Colors.black,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -131,7 +124,7 @@ class _Bookapp2State extends State<Bookapp2> {
                     "${widget.thoughts}",
                     style: GoogleFonts.kanit(
                       fontSize: 16,
-                      color: Colors.blue,
+                      color: Colors.black,
                       fontWeight: FontWeight.normal,
                     ),
                   ),

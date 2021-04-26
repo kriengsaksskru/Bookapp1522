@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:BOOKAPP1522/Screens/app/Book_app.dart';
 import 'package:http/http.dart' as Http;
@@ -37,8 +36,8 @@ class _MenuPageState extends State<MenuPage> {
         'นิทานทั้งหมด',
         style: GoogleFonts.kanit(
           fontSize: 30,
-          color: Colors.brown,
-          fontWeight: FontWeight.w100,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
       ),
       actions: [searchBar.getSearchAction(context)],
@@ -69,12 +68,12 @@ class _MenuPageState extends State<MenuPage> {
 
   Future<String> _getMenuAPI() async {
     var response =
-        await Http.get('https://kriengsaksskru.github.io/booka1/book.json');
+        await Http.get('https://kriengsaksskru.github.io/book156/book.json');
 
     jsonData = json.decode(utf8.decode(response.bodyBytes));
     templeList.clear();
     for (var item in jsonData) {
-      TemplelData templelData = TemplelData(item['number'], item['name'],
+      TemplelData templelData = TemplelData(item['photo'], item['name'],
           item['short_Stories'], item['the_storyline'], item['thoughts']);
       templeList.add(templelData);
     }
@@ -93,7 +92,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.blue.shade200,
       appBar: searchBar.build(context),
       key: _scaffoldKey,
       body: Background(
@@ -113,7 +112,7 @@ class _MenuPageState extends State<MenuPage> {
                             MaterialPageRoute(
                                 // ignore: missing_required_param
                                 builder: (context) => Bookapp2(
-                                      number: templeList[index].number,
+                                      photo: templeList[index].photo,
                                       name: templeList[index].name,
                                       short_Stories:
                                           templeList[index].short_Stories,
@@ -126,7 +125,7 @@ class _MenuPageState extends State<MenuPage> {
                         title: Text(
                           "${templeListShow[index].name}",
                           style: GoogleFonts.kanit(
-                            fontSize: 20,
+                            fontSize: 30,
                           ),
                         ),
                       ),
@@ -152,13 +151,13 @@ class _MenuPageState extends State<MenuPage> {
 }
 
 class TemplelData {
-  int number;
+  String photo;
   String name;
   String short_Stories;
   String the_storyline;
   String thoughts;
 
-  TemplelData(this.number, this.name, this.short_Stories, this.the_storyline,
+  TemplelData(this.photo, this.name, this.short_Stories, this.the_storyline,
       this.thoughts);
   startsWith(String searchKey) {}
 }

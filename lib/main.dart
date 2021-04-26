@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Search',
+      title: 'BOOKAPP1522',
       theme: new ThemeData(
         primaryColor: Colors.blue[500],
         scaffoldBackgroundColor: Colors.blue,
