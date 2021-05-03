@@ -91,61 +91,102 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    var background = Background(
+      child: FutureBuilder(
+        future: _getMenuAPI(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 5 / 4,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+              ),
+              itemCount: templeListShow.length,
+              itemBuilder: (BuildContext context, index) {
+                return Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                      color: Colors.pink.shade100,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          20,
+                        ),
+                      )),
+                  child: InkWell(
+                    onTap: () {
+                      // ! Use templeListShow to display temple data
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              // ignore: missing_required_param
+                              builder: (context) => Bookapp2(
+                                    photo: templeListShow[index].photo,
+                                    name: templeListShow[index].name,
+                                    short_Stories:
+                                        templeListShow[index].short_Stories,
+                                    the_storyline:
+                                        templeListShow[index].the_storyline,
+                                    thoughts: templeListShow[index].thoughts,
+                                  )));
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10.0),
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(100),
+                              ),
+                            ),
+                          ),
+                          child: Image.network(
+                            "${templeListShow[index].photo}",
+                            height: 120,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ListView(
+                          shrinkWrap: true,
+                          children: [
+                            Container(
+                              alignment: FractionalOffset.center,
+                              width: double.infinity,
+                              child: Text(
+                                "${templeListShow[index].name}",
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                ],
+              ),
+            );
+          }
+        },
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.blue.shade200,
       appBar: searchBar.build(context),
       key: _scaffoldKey,
-      body: Background(
-        child: FutureBuilder(
-          future: _getMenuAPI(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: templeListShow.length,
-                itemBuilder: (BuildContext context, index) {
-                  return Card(
-                    child: InkWell(
-                      onTap: () {
-                        // ! Use templeListShow to display temple data
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                // ignore: missing_required_param
-                                builder: (context) => Bookapp2(
-                                      photo: templeList[index].photo,
-                                      name: templeList[index].name,
-                                      short_Stories:
-                                          templeList[index].short_Stories,
-                                      the_storyline:
-                                          templeList[index].the_storyline,
-                                      thoughts: templeList[index].thoughts,
-                                    )));
-                      },
-                      child: ListTile(
-                        title: Text(
-                          "${templeListShow[index].name}",
-                          style: GoogleFonts.kanit(
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            } else {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                  ],
-                ),
-              );
-            }
-          },
-        ),
-      ),
+      body: background,
     );
   }
 }
